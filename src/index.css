@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+@import './styles/tokens.css';
+
+/* 
+  Map client tokens into Tailwind's theme system.
+  This allows us to use classes like `bg-primary`, `font-heading`, etc. 
+  across the application without knowing the underlying client values.
+*/
+@theme {
+  /* Colors */
+  --color-primary: var(--client-color-primary);
+  --color-secondary: var(--client-color-secondary);
+  --color-accent: var(--client-color-accent);
+  --color-bg: var(--client-color-bg);
+  --color-surface: var(--client-color-surface);
+  --color-text-main: var(--client-color-text-main);
+  --color-text-muted: var(--client-color-text-muted);
+  --color-text-light: var(--client-color-text-light);
+
+  /* Typography */
+  --font-heading: var(--client-font-heading);
+  --font-body: var(--client-font-body);
+
+  /* Layout */
+  --spacing-section: var(--client-spacing-section);
+
+  /* Geometry */
+  --radius-theme: var(--client-radius-base);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    min-width: 320px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Accessibility: Smooth motion disable for prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Cross-browser scrollbar hiding utility */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

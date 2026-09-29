@@ -1,0 +1,11 @@
+/* 
+  Theme Entry Point
+  
+  To switch the visual theme of the application, change the imported tokens file below:
+  
+  - Modern Specialty Café (Default):  @import './tokens-cafe.css';
+  - Luxury Fine Dining & Cellar:       @import './tokens-finedining.css';
+*/
+
+@import './tokens-cafe.css';
+/* @import './tokens-finedining.css'; */

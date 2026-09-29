@@ -1,0 +1,17 @@
+{
+  "name": "Aura Coffee Roasters",
+  "short_name": "Aura",
+  "description": "Artisan Coffee & Mindful Atmosphere in New York",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf9f5",
+  "theme_color": "#2c221e",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

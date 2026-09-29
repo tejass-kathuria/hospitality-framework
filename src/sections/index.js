@@ -1,0 +1,7 @@
+export { HeroSection } from './Hero/HeroSection.jsx'
+export { AboutSection } from './About/AboutSection.jsx'
+export { MenuSection } from './Menu/MenuSection.jsx'
+export { GallerySection } from './Gallery/GallerySection.jsx'
+export { TestimonialsSection } from './Testimonials/TestimonialsSection.jsx'
+export { EventsSection } from './Events/EventsSection.jsx'
+export { ContactSection } from './Contact/ContactSection.jsx'

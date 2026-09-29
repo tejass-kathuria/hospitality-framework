@@ -1,0 +1,7 @@
+export { businessConfig } from './business.js'
+export { navigationConfig } from './navigation.js'
+export { menuConfig } from './menu.js'
+export { galleryConfig } from './gallery.js'
+export { testimonialsConfig } from './testimonials.js'
+export { eventsConfig } from './events.js'
+export { sectionsConfig } from './sections.js'

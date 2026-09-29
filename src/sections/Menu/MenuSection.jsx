@@ -1,0 +1,151 @@
+/**
+ * MenuSection Component
+ *
+ * Configurable, data-driven menu section featuring category filter tabs,
+ * responsive grid item cards, dietary tag badges, prices, and subtle animations
+ * respecting reduced-motion accessibility.
+ */
+
+import { useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import {
+  SectionWrapper,
+  SectionHeading,
+  Card,
+  Image,
+  Badge,
+  Button,
+} from '../../components/ui/index.js'
+import { menuConfig } from '../../config/index.js'
+
+export function MenuSection({ config = menuConfig, id = 'menu' }) {
+  const { title, subtitle, categories = [], items = [] } = config
+  const [activeCategory, setActiveCategory] = useState('all')
+  const shouldReduceMotion = useReducedMotion()
+
+  const filteredItems =
+    activeCategory === 'all'
+      ? items
+      : items.filter((item) => item.category === activeCategory)
+
+  return (
+    <SectionWrapper id={id} bg="surface">
+      <SectionHeading
+        kicker="Tasteful Selection"
+        title={title || 'Our Menu'}
+        subtitle={subtitle}
+      />
+
+      {/* Category Filter Tabs */}
+      {categories.length > 0 && (
+        <div
+          role="tablist"
+          aria-label="Menu category filters"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12"
+        >
+          <Button
+            role="tab"
+            aria-selected={activeCategory === 'all'}
+            aria-controls="menu-items-grid"
+            variant={activeCategory === 'all' ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveCategory('all')}
+          >
+            All Items
+          </Button>
+
+          {categories.map((cat) => (
+            <Button
+              key={cat.id}
+              role="tab"
+              aria-selected={activeCategory === cat.id}
+              aria-controls="menu-items-grid"
+              variant={activeCategory === cat.id ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setActiveCategory(cat.id)}
+            >
+              {cat.name}
+            </Button>
+          ))}
+        </div>
+      )}
+
+      {/* Menu Item Grid (1 col mobile -> 2 cols tablet -> 3 cols desktop) */}
+      <motion.div
+        id="menu-items-grid"
+        layout={!shouldReduceMotion}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredItems.map((item) => (
+            <motion.div
+              key={item.id}
+              layout={!shouldReduceMotion}
+              initial={
+                shouldReduceMotion
+                  ? { opacity: 1 }
+                  : { opacity: 0, scale: 0.96 }
+              }
+              animate={{ opacity: 1, scale: 1 }}
+              exit={
+                shouldReduceMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, scale: 0.96 }
+              }
+              transition={{ duration: shouldReduceMotion ? 0.15 : 0.25 }}
+            >
+              <Card
+                variant="elevated"
+                padding="none"
+                className="h-full flex flex-col overflow-hidden group"
+              >
+                {item.image && (
+                  <div className="relative overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      aspectRatio="landscape"
+                      className="group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {item.featured && (
+                      <div className="absolute top-3 right-3">
+                        <Badge variant="accent" size="sm">
+                          Featured
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="font-heading text-xl font-bold text-text-main group-hover:text-primary transition-colors">
+                      {item.name}
+                    </h3>
+                    <span className="font-body text-lg font-bold text-primary shrink-0">
+                      {item.price}
+                    </span>
+                  </div>
+
+                  <p className="font-body text-sm text-text-muted mb-6 flex-grow leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  {item.dietary && item.dietary.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-text-muted/10 mt-auto">
+                      {item.dietary.map((tag) => (
+                        <Badge key={tag} variant="secondary" size="sm">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    </SectionWrapper>
+  )
+}

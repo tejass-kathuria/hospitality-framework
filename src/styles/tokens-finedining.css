@@ -1,0 +1,40 @@
+/* 
+  Client-Specific Design Tokens (Theme: Luxury Fine Dining & Wine Cellar)
+  Demo Brand: Nocturne Restaurant & Wine Cellar
+  
+  Visual Direction:
+  - Deep obsidian / onyx background palette
+  - Polished dark charcoal surface layers
+  - Burnished warm gold & brass metallic accents
+  - High-contrast warm alabaster / off-white typography
+  - Classic luxury serif typography for headings
+  - Sharp, architectural corner radius (0.25rem) for a refined high-end ambiance
+*/
+:root {
+  /* --- Colors --- */
+  --client-color-primary: #c5a059; /* Burnished warm gold / brass */
+  --client-color-secondary: #e6c887; /* Light champagne gold */
+  --client-color-accent: #232220; /* Deep bronze-black */
+
+  --client-color-bg: #0c0c0e; /* Deep obsidian black */
+  --client-color-surface: #141418; /* Dark charcoal surface for cards/elevations */
+
+  --client-color-text-main: #f5f2eb; /* Warm alabaster / off-white */
+  --client-color-text-muted: #9e988f; /* Muted warm silver-gray */
+  --client-color-text-light: #ffffff; /* Crisp pure white */
+
+  /* --- Typography --- */
+  --client-font-heading:
+    'Cinzel', 'Playfair Display', 'Didot', ui-serif, Georgia, serif;
+  --client-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Spacing & Layout --- */
+  --client-spacing-section: 6rem;
+  --client-container-max: 1240px;
+
+  /* --- Borders & Geometry --- */
+  --client-radius-base: 0.25rem; /* Sharp, refined architectural radius */
+
+  /* --- Transitions --- */
+  --client-transition-base: 350ms cubic-bezier(0.25, 1, 0.5, 1);
+}

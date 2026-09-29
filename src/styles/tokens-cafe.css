@@ -1,0 +1,37 @@
+/* 
+  Client-Specific Design Tokens (Theme: Modern Specialty Café)
+  Demo Brand: Aura Coffee Roasters
+  
+  Visual Direction:
+  - Warm neutral & espresso tones
+  - Clean off-white background with soft white surfaces
+  - Gentle rounded geometry
+  - Editorial serif headings & crisp modern sans-serif body
+*/
+:root {
+  /* --- Colors --- */
+  --client-color-primary: #8c6239; /* Espresso brown */
+  --client-color-secondary: #d4a373; /* Latte */
+  --client-color-accent: #e9edc9; /* Soft sage/matcha */
+
+  --client-color-bg: #fafafa; /* Warm off-white */
+  --client-color-surface: #ffffff; /* Pure white for cards */
+
+  --client-color-text-main: #2c2c2c; /* Charcoal */
+  --client-color-text-muted: #757575; /* Soft gray */
+  --client-color-text-light: #fdfdfd; /* For text on dark backgrounds */
+
+  /* --- Typography --- */
+  --client-font-heading: 'Playfair Display', ui-serif, Georgia, serif;
+  --client-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Spacing & Layout --- */
+  --client-spacing-section: 5rem;
+  --client-container-max: 1200px;
+
+  /* --- Borders & Geometry --- */
+  --client-radius-base: 0.5rem; /* Soft rounded corners */
+
+  /* --- Transitions --- */
+  --client-transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
