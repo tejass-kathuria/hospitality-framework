@@ -1,8 +1,9 @@
 /**
  * Footer Component
  *
- * Configurable website footer displaying brand identity, quick navigation links
- * from the section registry, opening hours, contact details, social links, and copyright.
+ * Broadsheet-style editorial website footer displaying brand identity,
+ * section registry links, operational hours, contact details, and social channels
+ * with hairline grid dividers and monospace technical metadata.
  */
 
 import { Container } from '../ui/index.js'
@@ -24,38 +25,42 @@ export function Footer({
   }
 
   return (
-    <footer className="bg-text-main text-text-light pt-16 pb-12 border-t border-text-light/10">
+    <footer className="bg-[#08080a] text-text-main pt-20 pb-14 border-t border-white/10">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-16">
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
-            <h3 className="font-heading text-2xl font-bold tracking-tight text-text-light">
+            <h3 className="font-heading text-2xl sm:text-3xl font-normal tracking-tight text-text-main">
               {business.name}
             </h3>
-            <p className="font-body text-sm text-text-light/70 leading-relaxed max-w-sm">
+            <p className="font-body text-sm text-text-muted leading-relaxed max-w-sm">
               {business.description || business.tagline}
             </p>
             {business.establishedYear && (
-              <p className="font-body text-xs text-text-light/50">
-                Est. {business.establishedYear}
+              <p className="font-mono text-xs tracking-widest uppercase text-text-muted/60">
+                {'//'} ARCHIVE EST. {business.establishedYear}
               </p>
             )}
           </div>
 
           {/* Col 2: Quick Links from Registry */}
           <div>
-            <h4 className="font-heading text-base font-bold text-text-light uppercase tracking-wider mb-4">
-              Quick Links
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-5 flex items-center gap-2">
+              <span className="opacity-50">{'//'}</span>
+              <span>INDEX NAVIGATION</span>
             </h4>
-            <ul className="space-y-2.5 font-body text-sm text-text-light/75">
-              {sections.map((section) => (
+            <ul className="space-y-2.5 font-mono text-xs uppercase tracking-wider text-text-muted">
+              {sections.map((section, idx) => (
                 <li key={section.id}>
                   <a
                     href={`#${section.id}`}
                     onClick={(e) => handleNavClick(e, section.id)}
-                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary focus-visible:underline"
+                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary flex items-center gap-2"
                   >
-                    {section.label}
+                    <span className="text-[10px] opacity-40">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span>{section.label}</span>
                   </a>
                 </li>
               ))}
@@ -64,33 +69,40 @@ export function Footer({
 
           {/* Col 3: Opening Hours */}
           <div>
-            <h4 className="font-heading text-base font-bold text-text-light uppercase tracking-wider mb-4">
-              Hours
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-5 flex items-center gap-2">
+              <span className="opacity-50">{'//'}</span>
+              <span>OPERATING HOURS</span>
             </h4>
             {business.openingHours && business.openingHours.length > 0 ? (
-              <ul className="space-y-2.5 font-body text-sm text-text-light/75">
+              <ul className="space-y-3 font-body text-xs sm:text-sm text-text-muted">
                 {business.openingHours.map((sched, idx) => (
-                  <li key={idx} className="flex flex-col">
-                    <span className="font-medium text-text-light">
+                  <li
+                    key={idx}
+                    className="flex flex-col border-b border-white/[0.06] pb-2 last:border-none"
+                  >
+                    <span className="font-mono text-xs uppercase tracking-wider text-text-main">
                       {sched.days}
                     </span>
-                    <span className="text-text-light/60">{sched.hours}</span>
+                    <span className="font-body text-xs text-text-muted mt-0.5">
+                      {sched.hours}
+                    </span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="font-body text-sm text-text-light/75">Open Daily</p>
+              <p className="font-body text-sm text-text-muted">Open Daily</p>
             )}
           </div>
 
           {/* Col 4: Contact & Socials */}
           <div>
-            <h4 className="font-heading text-base font-bold text-text-light uppercase tracking-wider mb-4">
-              Connect
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-5 flex items-center gap-2">
+              <span className="opacity-50">{'//'}</span>
+              <span>LOCATION & DISPATCH</span>
             </h4>
-            <div className="space-y-3 font-body text-sm text-text-light/75 mb-6">
+            <div className="space-y-3 font-body text-xs sm:text-sm text-text-muted mb-6">
               {business.contact?.address && (
-                <p>
+                <p className="leading-relaxed">
                   {business.contact.address.fullAddress ||
                     business.contact.address}
                 </p>
@@ -99,7 +111,7 @@ export function Footer({
                 <p>
                   <a
                     href={`tel:${business.contact.phone.replace(/[^0-9+]/g, '')}`}
-                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary focus-visible:underline"
+                    className="font-mono text-xs hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary"
                   >
                     {business.contact.phone}
                   </a>
@@ -109,7 +121,7 @@ export function Footer({
                 <p>
                   <a
                     href={`mailto:${business.contact.email}`}
-                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary focus-visible:underline"
+                    className="font-mono text-xs hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary"
                   >
                     {business.contact.email}
                   </a>
@@ -127,7 +139,7 @@ export function Footer({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit our ${social.platform} profile`}
-                    className="px-3 py-1.5 bg-text-light/10 hover:bg-primary hover:text-text-light text-text-light/90 text-xs font-body rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    className="px-2.5 py-1 bg-white/[0.04] hover:bg-primary/20 border border-white/10 hover:border-primary/40 text-text-main text-[11px] font-mono uppercase tracking-wider rounded-theme transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {social.platform}
                   </a>
@@ -138,11 +150,11 @@ export function Footer({
         </div>
 
         {/* Copyright Bottom Bar */}
-        <div className="pt-8 border-t border-text-light/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-body text-text-light/50">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono uppercase tracking-widest text-text-muted/60">
           <p>
-            &copy; {currentYear} {business.name}. All rights reserved.
+            &copy; {currentYear} {business.name}. ALL RIGHTS RESERVED.
           </p>
-          <p>Crafted with the Hospitality Website Framework.</p>
+          <p className="opacity-80">ARCHITECTURAL HOSPITALITY FRAMEWORK</p>
         </div>
       </Container>
     </footer>

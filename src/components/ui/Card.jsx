@@ -1,15 +1,16 @@
 /**
  * Card Component
  *
- * Flexible content container used for menu items, testimonials, events, and cards.
- * Supports multiple visual variants, padding options, and hover interactions.
+ * Architectural content compartment used for menu items, testimonials, events, and highlights.
+ * Uses hairline borders, matte basalt surfaces, and clean hover state transitions.
  */
 
 const variantStyles = {
-  default: 'bg-surface border border-text-muted/15 shadow-sm',
+  default: 'bg-surface border border-white/10 transition-colors duration-200',
   elevated:
-    'bg-surface border border-text-muted/10 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300',
-  outline: 'bg-surface border-2 border-primary/20 hover:border-primary/50',
+    'bg-surface border border-white/10 hover:border-white/30 hover:bg-[#1a1a1e] transition-all duration-200',
+  outline:
+    'bg-transparent border border-white/15 hover:border-primary/60 transition-colors duration-200',
   ghost: 'bg-transparent border-none shadow-none',
 }
 
@@ -29,7 +30,7 @@ export function Card({
   onClick,
   ...props
 }) {
-  const baseStyles = 'rounded-theme overflow-hidden transition-colors'
+  const baseStyles = 'rounded-theme overflow-hidden'
   const variantClass = variantStyles[variant] || variantStyles.default
   const paddingClass = paddingStyles[padding] || paddingStyles.md
   const interactiveClass = onClick ? 'cursor-pointer' : ''

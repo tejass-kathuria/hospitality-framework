@@ -1,9 +1,9 @@
 /**
  * Navbar Component
  *
- * Sticky navigation header dynamically wired to the section registry.
- * Features active section highlighting, smooth scrolling, responsive mobile menu drawer,
- * keyboard accessibility, and CTA action button.
+ * Structured, editorial navigation header with architectural hairline borders,
+ * operational status indicator, monospace index links, responsive mobile drawer,
+ * and high-contrast tactile action triggers.
  */
 
 import { useState, useEffect, useCallback } from 'react'
@@ -25,7 +25,7 @@ export function Navbar({
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Track window scroll for background elevation style
+  // Track window scroll for subtle background elevation style
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -61,45 +61,55 @@ export function Navbar({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-bg/95 backdrop-blur-md shadow-sm border-b border-text-muted/10 py-3 sm:py-4'
-          : 'bg-transparent py-4 sm:py-6'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
+        ? 'bg-[#0d0d0e]/95 backdrop-blur-md shadow-lg border-b-2 border-white/10 py-3 sm:py-3.5'
+        : 'bg-[#0d0d0e]/85 backdrop-blur-sm border-b-2 border-primary/100 py-4 sm:py-4.5'
+        }`}
     >
       <Container>
         <div className="flex items-center justify-between">
-          {/* Brand Logo / Name */}
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, 'hero')}
-            className="group flex items-center gap-2 rounded-theme focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            <span className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-text-main group-hover:text-primary transition-colors">
-              {business.name}
-            </span>
-          </a>
+          {/* Brand Logo / Wordmark & Live Operational Status */}
+          <div className="flex items-center gap-4">
+            <a
+              href="#hero"
+              onClick={(e) => handleNavClick(e, 'hero')}
+              className="group flex items-center gap-2 rounded-theme focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+            >
+              <span className="font-heading text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-text-main group-hover:text-primary transition-colors">
+                {business.name}
+              </span>
+            </a>
+
+            {/* Live Status Badge */}
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-theme bg-white/[0.04] border border-white/10 text-[11px] font-mono uppercase tracking-widest text-text-muted">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Open Today</span>
+            </div>
+          </div>
 
           {/* Desktop Navigation Links (Visible on Large Screens) */}
           <nav
             role="navigation"
             aria-label="Main Navigation"
-            className="hidden lg:flex items-center gap-1.5 xl:gap-2"
+            className="hidden lg:flex items-center gap-1 xl:gap-1.5"
           >
-            {sections.map((section) => {
+            {sections.map((section, idx) => {
               const isActive = activeSection === section.id
+              const indexFormatted = String(idx + 1).padStart(2, '0')
               return (
                 <a
                   key={section.id}
                   href={`#${section.id}`}
                   onClick={(e) => handleNavClick(e, section.id)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`px-3 py-1.5 rounded-full font-body text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                    isActive
-                      ? 'bg-primary/10 text-primary font-semibold'
-                      : 'text-text-muted hover:text-text-main hover:bg-surface/50'
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-theme font-mono text-xs uppercase tracking-wider transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${isActive
+                    ? 'text-primary bg-primary/10 border border-primary/30 font-semibold'
+                    : 'text-text-muted hover:text-text-main hover:bg-white/5 border border-transparent'
+                    }`}
                 >
+                  <span className="text-[10px] opacity-40 mr-1.5 font-normal">
+                    {indexFormatted}
+                  </span>
                   {section.label}
                 </a>
               )
@@ -130,12 +140,12 @@ export function Navbar({
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-              className="lg:hidden p-2 rounded-theme text-text-main hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer"
+              className="lg:hidden p-2 rounded-theme text-text-main border border-white/10 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
@@ -149,30 +159,33 @@ export function Navbar({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden bg-surface border-b border-text-muted/15 shadow-xl overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="lg:hidden bg-[#0d0d0e] border-b border-white/10 shadow-2xl overflow-hidden"
           >
             <Container className="py-6 flex flex-col gap-2">
-              {sections.map((section) => {
+              {sections.map((section, idx) => {
                 const isActive = activeSection === section.id
+                const indexFormatted = String(idx + 1).padStart(2, '0')
                 return (
                   <a
                     key={section.id}
                     href={`#${section.id}`}
                     onClick={(e) => handleNavClick(e, section.id)}
-                    className={`px-4 py-3 rounded-theme font-body text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                      isActive
-                        ? 'bg-primary/10 text-primary font-semibold'
-                        : 'text-text-main hover:bg-bg'
-                    }`}
+                    className={`px-4 py-3 rounded-theme font-mono text-sm uppercase tracking-wider flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${isActive
+                      ? 'bg-primary/10 text-primary border border-primary/30 font-semibold'
+                      : 'text-text-main hover:bg-white/5 border border-transparent'
+                      }`}
                   >
-                    {section.label}
+                    <span>{section.label}</span>
+                    <span className="text-xs font-mono opacity-50">
+                      {'//'} {indexFormatted}
+                    </span>
                   </a>
                 )
               })}
 
               {navigation.ctaButton && (
-                <div className="mt-4 pt-4 border-t border-text-muted/10">
+                <div className="mt-4 pt-4 border-t border-white/10">
                   <Button
                     href={navigation.ctaButton.href}
                     onClick={(e) => {

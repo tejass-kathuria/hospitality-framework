@@ -1,25 +1,25 @@
 /**
  * Button Component
  *
- * Flexible, accessible button component supporting multiple visual variants,
- * sizes, and link/button behaviors.
+ * Tactile, architectural button component supporting multiple visual variants,
+ * sharp geometry, uppercase monospace tracking, and accessible focus states.
  */
 
 const variantStyles = {
   primary:
-    'bg-primary text-text-light hover:bg-secondary hover:text-text-main focus-visible:ring-primary',
+    'bg-primary text-text-light border border-primary hover:bg-text-main hover:text-bg hover:border-text-main focus-visible:ring-primary shadow-sm',
   secondary:
-    'bg-accent text-text-main hover:bg-secondary focus-visible:ring-secondary',
+    'bg-surface text-text-main border border-white/20 hover:border-text-main hover:bg-white/10 focus-visible:ring-text-main',
   outline:
-    'border border-primary text-primary hover:bg-primary hover:text-text-light focus-visible:ring-primary',
+    'bg-transparent border border-white/30 text-text-main hover:bg-text-main hover:text-bg hover:border-text-main focus-visible:ring-primary',
   ghost:
-    'bg-transparent text-text-main hover:bg-accent/50 focus-visible:ring-primary',
+    'bg-transparent text-text-muted hover:text-text-main hover:bg-white/5 focus-visible:ring-primary',
 }
 
 const sizeStyles = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg font-medium',
+  sm: 'px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase font-semibold',
+  md: 'px-5 py-2.5 text-xs sm:text-sm font-mono tracking-wider uppercase font-semibold',
+  lg: 'px-7 py-3.5 text-sm sm:text-base font-mono tracking-widest uppercase font-semibold',
 }
 
 export function Button({
@@ -34,7 +34,7 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center font-body rounded-theme transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer'
+    'inline-flex items-center justify-center rounded-theme transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-40 disabled:pointer-events-none cursor-pointer active:translate-y-[1px]'
 
   const combinedClasses =
     `${baseStyles} ${variantStyles[variant] || variantStyles.primary} ${sizeStyles[size] || sizeStyles.md} ${className}`.trim()

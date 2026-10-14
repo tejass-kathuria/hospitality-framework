@@ -1,7 +1,7 @@
 /**
  * GallerySection Component
  *
- * Configurable image gallery section with category filters, responsive grid layout,
+ * Configurable image gallery section with category filters, editorial grid layout,
  * and an accessible lightbox modal featuring keyboard navigation, focus trapping,
  * and reduced-motion support.
  */
@@ -15,7 +15,6 @@ import {
   Card,
   Image,
   Badge,
-  Button,
 } from '../../components/ui/index.js'
 import { galleryConfig } from '../../config/index.js'
 
@@ -87,9 +86,11 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
   return (
     <SectionWrapper id={id} bg="muted">
       <SectionHeading
-        kicker="Atmosphere & Craft"
+        kicker="03 // SPACE & ARCHIVE"
         title={title || 'The Atmosphere'}
         subtitle={subtitle}
+        align="center"
+        className="mb-12"
       />
 
       {/* Category Filter Tabs */}
@@ -97,24 +98,31 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
         <div
           role="tablist"
           aria-label="Gallery category filters"
-          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12 sm:mb-16"
         >
-          {categories.map((cat) => (
-            <Button
-              key={cat}
-              role="tab"
-              aria-selected={activeCategory === cat}
-              aria-controls="gallery-images-grid"
-              variant={activeCategory === cat ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => {
-                setActiveCategory(cat)
-                setSelectedIndex(null)
-              }}
-            >
-              {cat}
-            </Button>
-          ))}
+          {categories.map((cat) => {
+            const isSelected = activeCategory === cat
+            return (
+              <button
+                key={cat}
+                type="button"
+                role="tab"
+                aria-selected={isSelected}
+                aria-controls="gallery-images-grid"
+                onClick={() => {
+                  setActiveCategory(cat)
+                  setSelectedIndex(null)
+                }}
+                className={`px-4 py-2 rounded-theme font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  isSelected
+                    ? 'bg-primary text-text-light border border-primary font-bold shadow-sm'
+                    : 'bg-surface text-text-muted border border-white/10 hover:border-white/30 hover:text-text-main'
+                }`}
+              >
+                {cat}
+              </button>
+            )
+          })}
         </div>
       )}
 
@@ -132,13 +140,13 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
               initial={
                 shouldReduceMotion
                   ? { opacity: 1 }
-                  : { opacity: 0, scale: 0.95 }
+                  : { opacity: 0, scale: 0.98 }
               }
               animate={{ opacity: 1, scale: 1 }}
               exit={
                 shouldReduceMotion
                   ? { opacity: 0 }
-                  : { opacity: 0, scale: 0.95 }
+                  : { opacity: 0, scale: 0.98 }
               }
               transition={{ duration: shouldReduceMotion ? 0.15 : 0.25 }}
             >
@@ -146,7 +154,7 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
                 variant="elevated"
                 padding="none"
                 onClick={() => setSelectedIndex(idx)}
-                className="group cursor-pointer overflow-hidden relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group cursor-pointer overflow-hidden relative border border-white/10 hover:border-white/30 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 tabIndex={0}
                 role="button"
                 aria-label={`View ${img.title || 'image'} in lightbox`}
@@ -157,22 +165,31 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
                   }
                 }}
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt || img.title}
-                  aspectRatio="square"
-                  className="group-hover:scale-105 transition-transform duration-500"
-                />
+                <div className="relative">
+                  <Image
+                    src={img.src}
+                    alt={img.alt || img.title}
+                    aspectRatio="square"
+                    className="group-hover:scale-105 transition-transform duration-700"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-text-main/80 via-text-main/20 to-transparent opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  {img.category && (
-                    <Badge variant="accent" size="sm" className="mb-2 w-fit">
-                      {img.category}
+                  {/* Monospace Figure Overlay */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <Badge variant="dark" size="sm">
+                      FIG. {String(idx + 1).padStart(2, '0')}
                     </Badge>
-                  )}
-                  <h3 className="font-heading text-lg font-bold text-text-light">
-                    {img.title}
-                  </h3>
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    {img.category && (
+                      <span className="font-mono text-xs uppercase tracking-widest text-primary mb-1">
+                        {'//'} {img.category}
+                      </span>
+                    )}
+                    <h3 className="font-heading text-lg font-normal text-text-light">
+                      {img.title}
+                    </h3>
+                  </div>
                 </div>
               </Card>
             </motion.div>
@@ -189,7 +206,7 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
             exit={{ opacity: 0 }}
             transition={{ duration: shouldReduceMotion ? 0.1 : 0.2 }}
             onClick={closeModal}
-            className="fixed inset-0 z-50 bg-text-main/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+            className="fixed inset-0 z-50 bg-[#070709]/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-label="Image Lightbox"
@@ -200,9 +217,9 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
               type="button"
               onClick={closeModal}
               aria-label="Close lightbox"
-              className="absolute top-6 right-6 z-10 p-3 text-text-light hover:text-primary transition-colors bg-surface/10 hover:bg-surface/20 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              className="absolute top-6 right-6 z-10 p-2.5 text-text-light hover:text-primary transition-colors bg-white/5 hover:bg-white/10 border border-white/15 rounded-theme cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
 
             {/* Previous Button */}
@@ -214,43 +231,46 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
                   handlePrev()
                 }}
                 aria-label="Previous image"
-                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-3 text-text-light hover:text-primary transition-colors bg-surface/10 hover:bg-surface/20 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-2.5 text-text-light hover:text-primary transition-colors bg-white/5 hover:bg-white/10 border border-white/15 rounded-theme cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
             )}
 
             {/* Lightbox Main Content Container */}
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center justify-center"
+              className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center justify-center p-2 bg-[#121215] border border-white/15 rounded-theme shadow-2xl"
             >
               <motion.img
                 key={selectedImage.src}
                 initial={
                   shouldReduceMotion
                     ? { opacity: 1 }
-                    : { scale: 0.96, opacity: 0 }
+                    : { scale: 0.98, opacity: 0 }
                 }
                 animate={{ scale: 1, opacity: 1 }}
                 exit={
                   shouldReduceMotion
                     ? { opacity: 0 }
-                    : { scale: 0.96, opacity: 0 }
+                    : { scale: 0.98, opacity: 0 }
                 }
                 transition={{ duration: shouldReduceMotion ? 0.1 : 0.2 }}
                 src={selectedImage.src}
                 alt={selectedImage.alt || selectedImage.title}
-                className="max-h-[70vh] w-auto max-w-full object-contain rounded-theme shadow-2xl"
+                className="max-h-[70vh] w-auto max-w-full object-contain rounded-theme"
               />
 
               {/* Caption Bar */}
-              <div className="mt-4 text-center text-text-light">
-                <h4 className="font-heading text-xl font-bold">
+              <div className="mt-4 pb-2 text-center text-text-main w-full">
+                <span className="font-mono text-xs text-primary uppercase tracking-widest block mb-1">
+                  {'//'} ARCHIVE SPECIMEN
+                </span>
+                <h4 className="font-heading text-xl font-normal">
                   {selectedImage.title}
                 </h4>
                 {selectedImage.alt && (
-                  <p className="font-body text-sm text-text-light/70 mt-1">
+                  <p className="font-body text-xs sm:text-sm text-text-muted mt-1 max-w-md mx-auto">
                     {selectedImage.alt}
                   </p>
                 )}
@@ -266,9 +286,9 @@ export function GallerySection({ config = galleryConfig, id = 'gallery' }) {
                   handleNext()
                 }}
                 aria-label="Next image"
-                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-3 text-text-light hover:text-primary transition-colors bg-surface/10 hover:bg-surface/20 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-2.5 text-text-light hover:text-primary transition-colors bg-white/5 hover:bg-white/10 border border-white/15 rounded-theme cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             )}
           </motion.div>

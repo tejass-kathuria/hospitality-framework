@@ -1,8 +1,8 @@
 /**
  * SectionHeading Component
  *
- * Standardized section title block featuring an optional eyebrow/kicker badge,
- * main heading, and descriptive subtitle with alignment choices.
+ * Editorial section header block featuring monospace kicker stamp,
+ * dominant Special Elite heading without faux-bolding, and descriptive subtitle.
  */
 
 const alignStyles = {
@@ -30,8 +30,9 @@ export function SectionHeading({
       {kicker && (
         <div className="mb-3">
           {typeof kicker === 'string' ? (
-            <span className="font-body text-xs font-semibold uppercase tracking-widest text-primary">
-              {kicker}
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary flex items-center gap-2">
+              <span className="opacity-60">{'//'}</span>
+              <span>{kicker}</span>
             </span>
           ) : (
             kicker
@@ -40,7 +41,7 @@ export function SectionHeading({
       )}
 
       {title && (
-        <TitleTag className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-main leading-tight">
+        <TitleTag className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-normal tracking-tight text-text-main leading-[1.1]">
           {title}
         </TitleTag>
       )}
