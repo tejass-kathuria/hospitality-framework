@@ -3,7 +3,7 @@
 
 /* 
   Map client tokens into Tailwind's theme system.
-  This allows us to use classes like `bg-primary`, `font-heading`, etc. 
+  This allows us to use classes like `bg-primary`, `font-heading`, `font-mono`, etc. 
   across the application without knowing the underlying client values.
 */
 @theme {
@@ -20,6 +20,15 @@
   /* Typography */
   --font-heading: var(--client-font-heading);
   --font-body: var(--client-font-body);
+  --font-mono: var(
+    --client-font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace
+  );
 
   /* Layout */
   --spacing-section: var(--client-spacing-section);
@@ -51,6 +60,7 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+    font-weight: 400; /* Preserve typewriter letterform integrity, avoid browser faux-bold blur */
   }
 
   /* Accessibility: Smooth motion disable for prefers-reduced-motion */
@@ -76,4 +86,33 @@
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+/* Subtle dark raw brick / mortar texture for atmospheric hero backdrop */
+.bg-raw-brick {
+  background-color: #0b0b0d;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size:
+    80px 40px,
+    80px 40px,
+    20px 20px,
+    20px 20px;
+  background-position:
+    -1px -1px,
+    -1px -1px,
+    -1px -1px,
+    -1px -1px;
+}
+
+/* Subtle architectural dot grid */
+.bg-raw-dots {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
 }

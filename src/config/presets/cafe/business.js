@@ -43,8 +43,10 @@ export const businessConfig = {
       'Experience precision-brewed single origin coffees in a space designed for quiet clarity.',
     ctaPrimary: 'Explore Menu',
     ctaSecondary: 'Visit Us',
+    backgroundImage: 'https://imgs.search.brave.com/RpW4WVYm9zpZx6lrwnELWQv9bPOzRZ_Mc8WuAMOMkLo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbW9u/b2Nocm9tZS1kYXJr/LXdhbGwtYnJpY2tz/LWhrc2NqYjE4Zm5k/endyNTMuanBn', //brick
     bgImage:
-      'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1920&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1200&auto=format&fit=crop', //cafe
+
   },
   about: {
     title: 'Our Story',

@@ -1,37 +1,51 @@
 /* 
-  Client-Specific Design Tokens (Theme: Modern Specialty Café)
+  Client-Specific Design Tokens (Theme: Dark Editorial Hospitality)
   Demo Brand: Aura Coffee Roasters
   
   Visual Direction:
-  - Warm neutral & espresso tones
-  - Clean off-white background with soft white surfaces
-  - Gentle rounded geometry
-  - Editorial serif headings & crisp modern sans-serif body
+  - Deep obsidian & basalt charcoal foundation
+  - Raw, architectural hairline dividers
+  - Weathered chalk/alabaster reading typography
+  - Warm terracotta & amber embers
+  - Expressive Special Elite typewriter display paired with precision Inter sans & monospace metadata
+  - Disciplined sharp geometry (0.125rem / 2px radius)
 */
 :root {
   /* --- Colors --- */
-  --client-color-primary: #8c6239; /* Espresso brown */
-  --client-color-secondary: #d4a373; /* Latte */
-  --client-color-accent: #e9edc9; /* Soft sage/matcha */
+  --client-color-primary: #C96A2B;
+  /* Sophisticated burnt orange / café ember accent */
+  --client-color-secondary: #242428;
+  /* Hairline border charcoal / divider */
+  --client-color-accent: #e6a15c;
+  /* Warm honey/amber highlight */
 
-  --client-color-bg: #fafafa; /* Warm off-white */
-  --client-color-surface: #ffffff; /* Pure white for cards */
+  --client-color-bg: #0d0d0e;
+  /* Deep obsidian black canvas */
+  --client-color-surface: #161619;
+  /* Matte basalt surface for cards / compartments */
 
-  --client-color-text-main: #2c2c2c; /* Charcoal */
-  --client-color-text-muted: #757575; /* Soft gray */
-  --client-color-text-light: #fdfdfd; /* For text on dark backgrounds */
+  --client-color-text-main: #ece8e1;
+  /* Weathered chalk / off-white typography */
+  --client-color-text-muted: #a8a49a;
+  /* Warm stone/sand slate for legible secondary copy */
+  --client-color-text-light: #ffffff;
+  /* Crisp pure white */
 
   /* --- Typography --- */
-  --client-font-heading: 'Playfair Display', ui-serif, Georgia, serif;
+  --client-font-heading: 'Special Elite', monospace;
   --client-font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --client-font-mono:
+    'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 
   /* --- Spacing & Layout --- */
-  --client-spacing-section: 5rem;
-  --client-container-max: 1200px;
+  --client-spacing-section: 6rem;
+  --client-container-max: 1240px;
 
   /* --- Borders & Geometry --- */
-  --client-radius-base: 0.5rem; /* Soft rounded corners */
+  --client-radius-base: 0.125rem;
+  /* Sharp, disciplined 2px architectural radius */
 
   /* --- Transitions --- */
-  --client-transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --client-transition-base: 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
