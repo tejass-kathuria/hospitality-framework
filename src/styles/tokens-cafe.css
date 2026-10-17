@@ -12,8 +12,8 @@
 */
 :root {
   /* --- Colors --- */
-  --client-color-primary: #d97736;
-  /* Warm terracotta / ember accent */
+  --client-color-primary: #C96A2B;
+  /* Sophisticated burnt orange / café ember accent */
   --client-color-secondary: #242428;
   /* Hairline border charcoal / divider */
   --client-color-accent: #e6a15c;
@@ -26,8 +26,8 @@
 
   --client-color-text-main: #ece8e1;
   /* Weathered chalk / off-white typography */
-  --client-color-text-muted: #8e8b82;
-  /* Muted warm slate for secondary copy */
+  --client-color-text-muted: #a8a49a;
+  /* Warm stone/sand slate for legible secondary copy */
   --client-color-text-light: #ffffff;
   /* Crisp pure white */
 

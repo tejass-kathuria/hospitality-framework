@@ -87,26 +87,26 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
         {/* Top Context & Ticker Bar */}
         <motion.div
           {...fadeIn(0.05)}
-          className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-white/10 text-xs font-mono text-text-muted"
+          className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-white/[0.08] text-xs font-mono text-text-muted"
         >
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-text-main font-semibold">
+            <span className="flex items-center gap-1.5 text-text-main font-bold">
               <Compass className="w-3.5 h-3.5 text-primary" />
               <span>{addressShort.toUpperCase()}</span>
             </span>
             <span className="opacity-30">{'//'}</span>
-            <span className="hidden sm:inline tracking-wider">
+            <span className="hidden sm:inline tracking-wider font-medium">
               40.7209° N, 74.0022° W
             </span>
           </div>
 
           <div className="flex items-center gap-4 tracking-wider">
-            <span className="hidden md:inline-flex items-center gap-1.5 text-[11px] text-primary">
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[11px] font-bold text-primary">
               <Sparkles className="w-3 h-3" />
               <span>SMALL BATCH ROASTERY</span>
             </span>
             <span className="hidden md:inline opacity-30">{'//'}</span>
-            <span className="text-text-main">{todayHours}</span>
+            <span className="text-text-main font-medium">{todayHours}</span>
           </div>
         </motion.div>
 
@@ -130,7 +130,7 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
             </h1>
 
             {subheadline && (
-              <p className="font-body text-base sm:text-lg text-text-muted max-w-xl leading-relaxed mb-8">
+              <p className="font-body text-base sm:text-lg text-text-main max-w-xl leading-relaxed mb-8 font-medium">
                 {subheadline}
               </p>
             )}
@@ -142,10 +142,10 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
                   href="#menu"
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto font-bold tracking-widest shadow-md shadow-primary/10"
                 >
                   <span>{hero.ctaPrimary}</span>
-                  <span className="ml-2 font-mono text-sm opacity-80">→</span>
+                  <span className="ml-2 font-mono text-sm opacity-90">→</span>
                 </Button>
               )}
 
@@ -154,7 +154,7 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
                   href="#about"
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto font-bold tracking-wider !bg-[#303136] !text-[#F5F2ED] !border-[#42444a] hover:!bg-white hover:!text-[#111113] hover:!border-white transition-all duration-300 shadow-sm"
                 >
                   <span>{hero.ctaSecondary}</span>
                 </Button>
@@ -162,12 +162,12 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
             </div>
 
             {/* Operational Snapshot: 3 Micro Pillars */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 border-t0 border-white/10 w-full max-w-xl">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 border-t border-white/[0.08] w-full max-w-xl">
               <div>
                 <div className="font-mono text-xs sm:text-sm font-bold text-primary">
                   {about.stat1?.number || '100%'}
                 </div>
-                <div className="font-mono text-[10px] sm:text-xs text-text-muted uppercase tracking-wider mt-0.5">
+                <div className="font-mono text-[10px] sm:text-xs font-medium text-text-muted uppercase tracking-wider mt-0.5">
                   {about.stat1?.label || 'Direct Trade'}
                 </div>
               </div>
@@ -176,7 +176,7 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
                 <div className="font-mono text-xs sm:text-sm font-bold text-primary">
                   {about.stat2?.number || '12+'}
                 </div>
-                <div className="font-mono text-[10px] sm:text-xs text-text-muted uppercase tracking-wider mt-0.5">
+                <div className="font-mono text-[10px] sm:text-xs font-medium text-text-muted uppercase tracking-wider mt-0.5">
                   {about.stat2?.label || 'Single Origins'}
                 </div>
               </div>
@@ -185,7 +185,7 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
                 <div className="font-mono text-xs sm:text-sm font-bold text-primary">
                   DAILY
                 </div>
-                <div className="font-mono text-[10px] sm:text-xs text-text-muted uppercase tracking-wider mt-0.5">
+                <div className="font-mono text-[10px] sm:text-xs font-medium text-text-muted uppercase tracking-wider mt-0.5">
                   Fresh Bakes
                 </div>
               </div>
@@ -197,63 +197,63 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
             {...fadeUp(0.2)}
             className="lg:col-span-5 flex flex-col gap-4"
           >
-            {/* Framed Visual Image with Corner Registration Marks */}
-            <div className="relative p-1.5 bg-[#161619] border border-white/15 rounded-theme shadow-2xl group">
-              {/* Corner crosshairs / registration marks */}
-
-
+            {/* Framed Visual Image: Matching Lower Card Exactly (bg-[#303136] border border-[#42444a]) */}
+            <div className="group relative p-1.5 bg-[#303136] border border-[#42444a] rounded-theme shadow-2xl transition-all duration-300">
               <div className="overflow-hidden relative rounded-theme">
                 <Image
                   src={heroImage}
                   alt={`${name} craft atmosphere`}
                   aspectRatio="landscape"
-                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out block"
                   loading="eager"
                   fetchPriority="high"
                 />
 
                 {/* Overlaid Image Technical Label */}
                 <div className="absolute top-3 left-3 z-10">
-                  <Badge variant="dark" size="sm">
-                    FIG. 01 // ROASTERY BAR
+                  <Badge variant="dark" size="sm" className="bg-black/85 border-black/50 text-white font-bold tracking-widest">
+                    FIG. 01 // INSIDE THE CAFÉ
                   </Badge>
                 </div>
               </div>
             </div>
 
-            {/* "Today's Feature / Live Note" Compartment Card */}
-            <div className="p-4 sm:p-5 bg-[#161619] border border-white/10 rounded-theme">
+            {/* Lower Roast Profile Card: Dark Charcoal-Grey #303136 Default -> Solid Orange on Hover */}
+            <div
+              tabIndex={0}
+              className="p-4 sm:p-5 bg-[#303136] text-[#F5F2ED] border border-[#42444a] rounded-theme transition-all duration-300 ease-out hover:bg-primary hover:text-[#111113] hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg group cursor-pointer shadow-lg"
+            >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-widest flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>CURRENT ROAST PROFILE</span>
+                <span className="font-mono text-[11px] font-bold tracking-widest uppercase flex items-center gap-1.5 text-primary group-hover:text-[#111113] transition-colors duration-300">
+                  <span className="w-2 h-2 rounded-full bg-primary group-hover:bg-[#111113] transition-colors duration-300" />
+                  <span>TODAY&apos;S POUR // ON THE BAR</span>
                 </span>
-                <span className="font-mono text-[10px] text-text-muted">
-                  BATCH #2409
+                <span className="font-mono text-[11px] font-bold text-[#F5F2ED]/70 group-hover:text-[#111113]/80 transition-colors duration-300">
+                  SINGLE ORIGIN
                 </span>
               </div>
 
               <div className="flex items-baseline justify-between gap-4">
-                <h2 className="font-heading text-lg sm:text-xl font-normal text-text-main">
+                <h2 className="font-heading text-lg sm:text-xl font-bold text-[#F5F2ED] group-hover:text-[#111113] transition-colors duration-300">
                   Ethiopian Yirgacheffe V60
                 </h2>
                 <a
                   href="#menu"
-                  className="font-mono text-xs text-primary hover:text-text-main flex items-center gap-1 transition-colors shrink-0"
+                  className="font-mono text-xs font-bold text-primary group-hover:text-[#111113] group-hover:translate-x-0.5 flex items-center gap-1 transition-all duration-300 shrink-0 focus-visible:outline-none focus-visible:underline"
                 >
                   <span>Menu</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-primary group-hover:text-[#111113] transition-colors duration-300" />
                 </a>
               </div>
 
-              <p className="font-body text-xs sm:text-sm text-text-muted mt-1 leading-relaxed">
+              <p className="font-body text-xs sm:text-sm text-[#F5F2ED]/90 group-hover:text-[#111113] font-medium mt-1.5 leading-relaxed transition-colors duration-300">
                 Single-origin heirloom varietal. Delicately extracted with notes
                 of wild bergamot, sweet jasmine, and raw honey.
               </p>
 
-              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-text-muted">
-                <span>Elevation: 2,100 MASL</span>
-                <span className="text-text-main">Walk-ins Welcome</span>
+              <div className="mt-3.5 pt-3 border-t border-[#42444a] group-hover:border-[#111113]/25 flex items-center justify-between text-[11px] font-mono text-[#F5F2ED]/75 group-hover:text-[#111113]/85 transition-colors duration-300">
+                <span className="font-bold">Elevation: 2,100 MASL</span>
+                <span className="text-[#F5F2ED] group-hover:text-[#111113] font-bold transition-colors duration-300">Walk-ins Welcome</span>
               </div>
             </div>
           </motion.div>
@@ -261,11 +261,11 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
       </Container>
 
       {/* Bottom Technical Ticker Strip */}
-      <div className="relative z-10 mt-12 pt-4 border-t border-white/10">
+      <div className="relative z-10 mt-12 pt-4 border-t border-white/[0.08]">
         <Container>
           <div className="flex items-center justify-between text-[11px] font-mono text-text-muted uppercase tracking-widest">
             <span className="hidden sm:inline">
-              {'//'} ARCHIVAL RECORD: SPECIALTY TERROIR COFFEE
+              {'//'} FRESH ROASTED DAILY // SOHO, NY
             </span>
             <span className="truncate">
               {contact.address?.fullAddress ||
@@ -274,7 +274,7 @@ export function HeroSection({ config = businessConfig, id = 'hero' }) {
             </span>
             <a
               href="#about"
-              className="flex items-center gap-1.5 text-text-main hover:text-primary transition-colors focus-visible:outline-none"
+              className="flex items-center gap-1.5 text-text-main font-semibold hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-theme px-1.5 py-0.5"
               aria-label="Scroll to about story"
             >
               <span className="hidden sm:inline">EXPLORE THE STORY</span>

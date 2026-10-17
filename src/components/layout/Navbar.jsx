@@ -103,11 +103,11 @@ export function Navbar({
                   onClick={(e) => handleNavClick(e, section.id)}
                   aria-current={isActive ? 'page' : undefined}
                   className={`px-2.5 py-1.5 rounded-theme font-mono text-xs uppercase tracking-wider transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${isActive
-                    ? 'text-primary bg-primary/10 border border-primary/30 font-semibold'
-                    : 'text-text-muted hover:text-text-main hover:bg-white/5 border border-transparent'
+                    ? 'text-primary bg-primary/10 border border-primary/30 font-bold'
+                    : 'text-text-main/90 font-semibold hover:text-primary hover:bg-white/5 border border-transparent'
                     }`}
                 >
-                  <span className="text-[10px] opacity-40 mr-1.5 font-normal">
+                  <span className="text-[10px] opacity-50 mr-1.5 font-medium">
                     {indexFormatted}
                   </span>
                   {section.label}
