@@ -31,47 +31,65 @@ The styling layer uses **Tailwind CSS v4** coupled with CSS Custom Properties de
 
 Every theme defines a comprehensive set of semantic variables:
 
-| Variable                    | Description                          | Example (Café)         | Example (Fine Dining)          |
-| :-------------------------- | :----------------------------------- | :--------------------- | :----------------------------- |
-| `--client-color-primary`    | Main brand accent / active states    | `#2c2c2a`              | `#c5a059` (Warm Gold)          |
-| `--client-color-secondary`  | Supporting accent tone               | `#8c827a`              | `#e6c887` (Champagne)          |
-| `--client-color-accent`     | Highlights, badges, hover accents    | `#d97736`              | `#232220` (Bronze Black)       |
-| `--client-color-bg`         | Main canvas background               | `#faf8f5` (Warm Cream) | `#0c0c0e` (Obsidian)           |
-| `--client-color-surface`    | Card / elevation background          | `#ffffff`              | `#141418` (Charcoal)           |
-| `--client-color-text-main`  | Primary reading text                 | `#1a1a18`              | `#f5f2eb` (Alabaster)          |
-| `--client-color-text-muted` | Secondary / caption text             | `#6b665f`              | `#9e988f` (Warm Silver)        |
-| `--client-color-text-light` | Inverted / hero light text           | `#ffffff`              | `#ffffff`                      |
-| `--client-font-heading`     | Display & section header font        | `'Plus Jakarta Sans'`  | `'Cinzel', 'Playfair Display'` |
-| `--client-font-body`        | Body & UI font                       | `'Inter'`              | `'Inter'`                      |
-| `--client-radius-base`      | Corner roundness for cards & buttons | `0.75rem` (Soft)       | `0.25rem` (Sharp)              |
-| `--client-spacing-section`  | Default vertical section padding     | `6rem`                 | `6rem`                         |
-| `--client-container-max`    | Maximum container width              | `1200px`               | `1240px`                       |
-| `--client-transition-base`  | Standard animation timing            | `200ms ease`           | `350ms cubic-bezier(...)`      |
+| Variable                    | Description                          | Example (Café - Aura Coffee)             | Example (Fine Dining - Nocturne) |
+| :-------------------------- | :----------------------------------- | :--------------------------------------- | :------------------------------- |
+| `--client-color-primary`    | Main brand accent / active states    | `#C96A2B` (Burnt Orange)                 | `#c5a059` (Warm Gold)            |
+| `--client-color-secondary`  | Supporting divider / secondary tone  | `#242428` (Hairline Border Charcoal)     | `#e6c887` (Champagne)            |
+| `--client-color-accent`     | Highlights, badges, hover accents    | `#e6a15c` (Warm Honey/Amber)             | `#232220` (Bronze Black)         |
+| `--client-color-bg`         | Main canvas background               | `#0d0d0e` (Obsidian Black)               | `#0c0c0e` (Obsidian)             |
+| `--client-color-surface`    | Card / compartment background        | `#161619` (Matte Basalt Surface)         | `#141418` (Charcoal)             |
+| `--client-color-text-main`  | Primary reading text                 | `#ece8e1` (Weathered Chalk / Off-White)  | `#f5f2eb` (Alabaster)            |
+| `--client-color-text-muted` | Secondary / caption text             | `#a8a49a` (Warm Stone / Sand Slate)      | `#9e988f` (Warm Silver)          |
+| `--client-color-text-light` | Inverted / hero pure light text      | `#ffffff` (Pure White)                   | `#ffffff`                        |
+| `--client-font-heading`     | Display & section header font        | `'Special Elite', monospace`             | `'Cinzel', 'Playfair Display'`   |
+| `--client-font-body`        | Body & UI font                       | `'Inter'`                                | `'Inter'`                        |
+| `--client-font-mono`        | Monospace & technical metadata font  | `'Space Mono', monospace`                | `ui-monospace, monospace`        |
+| `--client-radius-base`      | Corner roundness for cards & buttons | `0.125rem` (Sharp 2px)                   | `0.25rem` (Sharp 4px)            |
+| `--client-spacing-section`  | Default vertical section padding     | `6rem`                                   | `6rem`                           |
+| `--client-container-max`    | Maximum container width              | `1240px`                                 | `1240px`                         |
+| `--client-transition-base`  | Standard animation timing            | `200ms cubic-bezier(0.16, 1, 0.3, 1)`    | `350ms cubic-bezier(0.25, ...)`  |
 
 ### 2.2 Tailwind Integration
 
 In `src/index.css`, Tailwind v4 binds `@theme` utility tokens directly to these custom properties:
 
 ```css
-@import './styles/tokens.css';
 @import 'tailwindcss';
+@import './styles/tokens.css';
 
 @theme {
-  --color-client-primary: var(--client-color-primary);
-  --color-client-secondary: var(--client-color-secondary);
-  --color-client-accent: var(--client-color-accent);
-  --color-client-bg: var(--client-color-bg);
-  --color-client-surface: var(--client-color-surface);
-  --color-client-text-main: var(--client-color-text-main);
-  --color-client-text-muted: var(--client-color-text-muted);
-  --color-client-text-light: var(--client-color-text-light);
+  /* Colors */
+  --color-primary: var(--client-color-primary);
+  --color-secondary: var(--client-color-secondary);
+  --color-accent: var(--client-color-accent);
+  --color-bg: var(--client-color-bg);
+  --color-surface: var(--client-color-surface);
+  --color-text-main: var(--client-color-text-main);
+  --color-text-muted: var(--client-color-text-muted);
+  --color-text-light: var(--client-color-text-light);
+
+  /* Typography */
   --font-heading: var(--client-font-heading);
   --font-body: var(--client-font-body);
-  --radius-client: var(--client-radius-base);
+  --font-mono: var(
+    --client-font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace
+  );
+
+  /* Layout */
+  --spacing-section: var(--client-spacing-section);
+
+  /* Geometry */
+  --radius-theme: var(--client-radius-base);
 }
 ```
 
-Components simply apply utilities such as `bg-client-bg`, `text-client-main`, `bg-client-surface`, `rounded-client`, and `font-heading`.
+Components simply apply utilities such as `bg-bg`, `bg-surface`, `bg-primary`, `text-text-main`, `text-text-muted`, `font-heading`, `font-mono`, and `rounded-theme`.
 
 ---
 
@@ -125,16 +143,18 @@ src/config/
 
 ## 4. Switching Between Built-in Themes
 
+Theme switching in the Hospitality Framework is a **developer-controlled, build-time / configuration toggle** rather than a dynamic client-facing dropdown. This ensures production deployments remain lightweight, compile only the active brand's assets, and keep administrative branding decisions strictly in the hands of the site developer.
+
 Switching the entire application between themes takes just two lines across two entry files:
 
 ### Step 1: Switch Design Tokens (`src/styles/tokens.css`)
 
 ```css
-/* For Modern Specialty Café */
+/* For Modern Specialty Café (Aura Coffee Roasters) */
 @import './tokens-cafe.css';
 /* @import './tokens-finedining.css'; */
 
-/* OR for Luxury Fine Dining */
+/* OR for Luxury Fine Dining (Nocturne Restaurant) */
 /* @import './tokens-cafe.css'; */
 @import './tokens-finedining.css';
 ```
@@ -142,11 +162,11 @@ Switching the entire application between themes takes just two lines across two 
 ### Step 2: Switch Business Content (`src/config/index.js`)
 
 ```javascript
-/* For Modern Specialty Café */
+/* For Modern Specialty Café (Aura Coffee Roasters) */
 export * from './presets/cafe/index.js'
 // export * from './presets/finedining/index.js'
 
-/* OR for Luxury Fine Dining */
+/* OR for Luxury Fine Dining (Nocturne Restaurant) */
 // export * from './presets/cafe/index.js'
 export * from './presets/finedining/index.js'
 ```
@@ -157,7 +177,19 @@ export * from './presets/finedining/index.js'
 
 To create a brand-new theme (e.g., _Artisan Cocktail Lounge_ or _Artisanal Bakery_):
 
-### Step 1: Create the Token Stylesheet
+### Step 1: Font Loading (`index.html`)
+
+If the new theme uses custom typography families not already loaded, include their font stylesheets in `index.html` (e.g., via Google Fonts `<link>` tags) or via CSS `@import`:
+
+```html
+<!-- Example: Loading Syne and DM Sans in index.html -->
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap"
+  rel="stylesheet"
+/>
+```
+
+### Step 2: Create the Token Stylesheet
 
 Create `src/styles/tokens-cocktail.css`:
 
@@ -173,6 +205,7 @@ Create `src/styles/tokens-cocktail.css`:
   --client-color-text-light: #ffffff;
   --client-font-heading: 'Syne', sans-serif;
   --client-font-body: 'DM Sans', sans-serif;
+  --client-font-mono: 'Space Mono', monospace;
   --client-spacing-section: 6rem;
   --client-container-max: 1200px;
   --client-radius-base: 0.5rem;
@@ -180,7 +213,7 @@ Create `src/styles/tokens-cocktail.css`:
 }
 ```
 
-### Step 2: Create the Preset Folder
+### Step 3: Create the Preset Folder
 
 Create `src/config/presets/cocktail/` and populate:
 
@@ -193,9 +226,28 @@ Create `src/config/presets/cocktail/` and populate:
 - `sections.js`
 - `index.js`
 
-### Step 3: Activate the Theme
+### Step 4: Activate the Theme
 
-Update `src/styles/tokens.css` and `src/config/index.js` to point to the new files.
+Update `src/styles/tokens.css` and `src/config/index.js` to point to the new files:
+
+```css
+/* src/styles/tokens.css */
+@import './tokens-cocktail.css';
+```
+
+```javascript
+/* src/config/index.js */
+export * from './presets/cocktail/index.js'
+```
+
+### Step 5: Verify the Theme
+
+Run the project verification commands to confirm there are no syntax errors, missing exports, or broken imports:
+
+```bash
+npm run lint
+npm run build
+```
 
 ---
 
@@ -204,5 +256,5 @@ Update `src/styles/tokens.css` and `src/config/index.js` to point to the new fil
 To preserve strict reusability across all current and future themes:
 
 - **DO NOT hardcode** business names, copy, prices, phone numbers, addresses, or images inside UI primitives (`src/components/ui/`) or sections (`src/sections/`).
-- **DO NOT hardcode** raw hex codes or fixed font families inside section JSX. Always use semantic Tailwind classes (`bg-client-bg`, `text-client-main`, `font-heading`, `rounded-client`).
+- **DO NOT hardcode** raw hex codes or fixed font families inside section JSX. Always use semantic Tailwind classes (`bg-bg`, `bg-surface`, `bg-primary`, `text-text-main`, `text-text-muted`, `font-heading`, `font-mono`, `rounded-theme`).
 - **DO NOT break prop interfaces** on section components. Sections must continue accepting an optional `config` prop and fallback to the centralized `config/index.js` exports.

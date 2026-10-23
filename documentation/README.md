@@ -85,34 +85,34 @@ The framework is designed to:
 
 ## Website
 
-- Responsive layout
-- Hero section
-- About section
-- Featured Menu
-- Gallery
-- Testimonials
-- Events section
-- Contact section
-- Google Maps integration
-- Opening Hours
-- Footer
+- Responsive, mobile-first layout
+- Hero section (asymmetric editorial split with direct context bar and interactive card)
+- About section (narrative story, pull quotes, stat counters)
+- Featured Menu (dynamic category tabs, dietary badges, origin notes)
+- Gallery (category filters, responsive grid, accessible Lightbox modal)
+- Testimonials (critic & guest reviews with touch-friendly carousel)
+- Events section (chronological event cards with date stamps and CTAs)
+- Contact section (React Hook Form validation, business hours, Google Maps embed)
+- Footer (multi-column business metadata, hours, social links)
 
-## User Experience
+## User Experience & Accessibility
 
-- Mobile-first design
-- Smooth scrolling
-- Sticky navigation
-- Responsive layouts
-- Modern typography
-- Subtle animations
+- Mobile-first navigation drawer with active section tracking
+- Accessible modal image viewer (Lightbox) with focus lock
+- Form validation via React Hook Form
+- Skip-to-content accessibility link and visible keyboard focus rings
+- Strict reduced-motion enforcement via `<MotionConfig reducedMotion="user">`
+- Floating Scroll-to-Top trigger
+- Asynchronous image decoding, skeleton loading states, and eager Hero LCP loading
 
-## Architecture
+## Architecture & Theming
 
-- Modular React components
-- Reusable UI library
-- Configuration-driven business data
-- Scalable folder structure
-- Separation of business data and presentation
+- Multi-brand design token system (`src/styles/tokens-cafe.css`, `src/styles/tokens-finedining.css`)
+- Modular configuration presets (`src/config/presets/cafe/`, `src/config/presets/finedining/`)
+- Two complete built-in hospitality themes: _Aura Coffee Roasters_ (Dark Editorial) and _Nocturne Restaurant & Wine Cellar_ (Luxury Fine Dining)
+- 2-step developer theme switcher (`src/styles/tokens.css` and `src/config/index.js`)
+- Reusable UI primitives (`Button`, `Badge`, `Container`, `SectionWrapper`, `SectionHeading`, `Card`, `Image`, `Skeleton`)
+- Error Boundary and custom 404 page
 
 ---
 
@@ -129,8 +129,8 @@ Planned additions include:
 - Event Management
 - Analytics Dashboard
 - SEO Improvements
-- Multiple Design Variations
-- Multiple Layout Presets
+- Additional Brand Presets (expanding beyond the two existing Café and Fine Dining presets)
+- Alternative Section Layout Presets
 
 ---
 
@@ -320,15 +320,17 @@ The frontend is intentionally designed so that local configuration files can lat
 
 # Roadmap
 
-- [ ] Complete reusable frontend framework
-- [ ] Create multiple design variants
-- [ ] Improve responsiveness
-- [ ] Build backend services
+- [x] Complete reusable frontend framework
+- [x] Create multiple brand presets (Specialty Café & Luxury Fine Dining)
+- [x] Responsive and accessibility audit
+- [x] Creative redesign: Dark editorial visual identity (Aura Coffee Roasters)
+- [x] External design system sync with Google Stitch (Aura Coffee)
+- [ ] Production deployment & hosting setup
+- [ ] Backend API & database services
 - [ ] Add reservation system
 - [ ] Develop admin dashboard
 - [ ] Integrate CMS
-- [ ] Improve SEO
-- [ ] Deploy production-ready template
+- [ ] Analytics & conversion tracking
 
 ---
 
@@ -349,7 +351,7 @@ Screenshots will be added as major sections of the framework are completed.
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/hospitality-website-framework.git
+git clone https://github.com/tejass-kathuria/hospitality-framework.git
 ```
 
 Install dependencies:
@@ -368,6 +370,18 @@ Create a production build:
 
 ```bash
 npm run build
+```
+
+Run linter:
+
+```bash
+npm run lint
+```
+
+Format code:
+
+```bash
+npm run format
 ```
 
 ---

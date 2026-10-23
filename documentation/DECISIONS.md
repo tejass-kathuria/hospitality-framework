@@ -309,22 +309,6 @@ Hospitality websites serve a diverse public audience across mobile and desktop d
 
 ---
 
-## Theme Tokens & Multi-Brand Preset Architecture
-
-**Status**
-
-Accepted
-
-**Decision**
-
-Separate visual identity (colors, typography, radii, spacing) into CSS custom property stylesheets (`src/styles/tokens-*.css`), and business content into modular preset directories (`src/config/presets/*`). Centralize active theme selection to one-line toggles in `src/styles/tokens.css` and `src/config/index.js` while maintaining backward-compatible proxy exports for legacy imports.
-
-**Reasoning**
-
-To prove genuine reusability, distinct hospitality brands (such as a Modern Specialty Café and a Luxury Fine Dining & Wine Cellar) must be deployable on the exact same codebase without modifying or duplicating any React components, sections, or application routing logic. Driving all styling through CSS Custom Properties mapped to Tailwind v4 `@theme` and all content through standardized JavaScript configuration objects guarantees instant brand customization with zero runtime overhead or component refactoring.
-
----
-
 # Project Documentation Strategy
 
 ---
@@ -424,6 +408,60 @@ The following principles should influence future decisions.
 - Design for maintainability.
 - Preserve the personality of every business.
 - Optimize for business value rather than technical novelty.
+
+---
+
+# Multi-Brand & Visual Identity Decisions
+
+---
+
+## Multi-Brand Token & Configuration Preset Architecture
+
+**Status**
+
+Accepted (Phase 7 - 2026-09-04)
+
+**Decision**
+
+Separate visual identity (colors, typography, radii, spacing) into CSS custom property stylesheets (`src/styles/tokens-*.css` imported via `src/styles/tokens.css`), and business content into modular preset directories (`src/config/presets/*` re-exported via `src/config/index.js`). Centralize active theme selection to one-line developer toggles in both entry files while maintaining 100% backward-compatible proxy re-exports for legacy imports.
+
+**Reasoning**
+
+To prove genuine reusability across multiple hospitality clients, distinct brands (such as a Modern Specialty Café and a Luxury Fine Dining & Wine Cellar) must be deployable on the exact same codebase without modifying or duplicating React components, sections, or application routing logic.
+
+Driving all styling through CSS Custom Properties mapped to Tailwind v4 `@theme` and all content through standardized JavaScript configuration objects guarantees instant brand customization with zero runtime overhead or component refactoring. Switching an entire site between themes requires modifying only two lines of code (one in `src/styles/tokens.css` and one in `src/config/index.js`), leaving UI primitives and sections completely decoupled from specific brand identities.
+
+---
+
+## Dark Editorial Visual Identity for Café Preset
+
+**Status**
+
+Accepted (Phase 8 - 2026-10-15)
+
+**Decision**
+
+Redesign the default modern café theme (_Aura Coffee Roasters_) from a generic light aesthetic into a high-contrast dark editorial visual identity. Adopt typewriter display typography (`Special Elite`), uppercase monospace metadata kickers (`Space Mono` with `//` prefixes), sharp 2px architectural geometry (`0.125rem`), a burnt orange ember accent (`#C96A2B`) on obsidian/basalt surfaces (`#0d0d0e`, `#161619`), and asymmetric section layouts.
+
+**Reasoning**
+
+Specialty coffee venues possess distinct artisanal craft, provenance, and atmosphere. Moving away from standard SaaS or dashboard-like layouts to an editorial composition with expressive typography and tactile micro-interactions better communicates authenticity and craftsmanship, fulfilling the core principle of creating websites with distinct personality.
+
+---
+
+## External Design Exploration via Google Stitch MCP
+
+**Status**
+
+Accepted (Post-Phase 8 - 2026-10-15)
+
+**Decision**
+
+Integrate Google Stitch via Stitch MCP as an external design exploration sandbox. Register a dedicated project (`Hospitality Framework - Aura Coffee`) and design system asset (`assets/14904771491707027720`) with a detailed `designMd` specification capturing the framework's visual identity, token mappings, typography scales, and component conventions.
+
+**Reasoning**
+
+Stitch provides an AI-assisted design space for rapid ideation and screen refinement without polluting or destabilizing the production React codebase. By registering the design system via MCP, external design concepts generated in Stitch can align with the framework's design tokens, while leaving implementation in React as a deliberate, manually reviewed engineering step. Stitch does not automatically generate or mutate application source files.
 
 ---
 

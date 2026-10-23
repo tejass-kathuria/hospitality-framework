@@ -48,14 +48,18 @@ Architecture should always prioritize:
 
 # Before Writing Code
 
-Always read these files first.
+Always read these files first:
 
-1. README.md
-2. CLIENT.md
-3. HANDOFF.md
-4. DECISIONS.md
+1. `README.md`
+2. `documentation/THEMING.md`
+3. `documentation/HANDOFF.md`
+4. `documentation/DECISIONS.md`
+5. `documentation/CLIENT.md` (only if onboarding a specific client; framework stays generic otherwise)
 
-Do not begin implementing features before understanding the current project state.
+Before making changes:
+- Inspect Git status (`git status`) to understand branch and working tree state.
+- Preserve all existing uncommitted user changes—never discard, overwrite, or revert them.
+- Do not begin implementing features before understanding the current project state.
 
 ---
 
@@ -63,14 +67,18 @@ Do not begin implementing features before understanding the current project stat
 
 Frontend
 
-- React
-- Vite
-- JavaScript
-- Tailwind CSS
+- React 19
+- Vite 8
+- JavaScript (ES Modules)
+- Tailwind CSS v4
 - Motion
-- React Router
+- React Router v7
 - Lucide React
 - React Hook Form
+
+Design Tooling (External)
+
+- Google Stitch (via Stitch MCP for design ideation and token-aligned exploration)
 
 Backend (Future)
 
@@ -315,31 +323,55 @@ Instead:
 
 ---
 
+# Agent Workflow & Verification
+
+Before editing:
+
+- Inspect current Git status (`git status`).
+- Preserve any existing uncommitted user changes.
+
+After editing:
+
+- Review the complete diff (`git diff`) for every modified file.
+- Verify that changes make the smallest necessary adjustments rather than unnecessary rewrites.
+- Run tests, linter (`npm run lint`), or build verification (`npm run build`) to confirm correctness.
+- Report any unresolved questions or claims that could not be verified.
+- Do not stage, commit, push, or alter Git configuration unless explicitly requested.
+
+---
+
 # Documentation Responsibilities
 
 If significant work is completed:
 
-Update
+Update:
 
-- HANDOFF.md
+- `documentation/HANDOFF.md`
+- `documentation/CHANGELOG.md`
 
 If architecture changes:
 
-Update
+Update:
 
-- DECISIONS.md
+- `documentation/DECISIONS.md`
 
-If setup changes:
+If setup or public features change:
 
-Update
+Update:
 
-- README.md
+- `README.md` (and `documentation/README.md`)
+
+If theme or design tokens change:
+
+Update:
+
+- `documentation/THEMING.md`
 
 If client requirements change:
 
-Update
+Update:
 
-- CLIENT.md
+- `documentation/CLIENT.md`
 
 ---
 
